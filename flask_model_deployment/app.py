@@ -29,7 +29,7 @@ def predict():
         prediction = model.predict(preprocessed_data)  # Assuming a list input
 
         # Format the prediction for display
-        predicted_class = prediction[0]  # Assuming single class output
+        predicted_class = round(prediction[0][0])  # Assuming single class output
 
         return render_template("results.html", prediction=predicted_class)
 

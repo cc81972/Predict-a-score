@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <title>Prediction Result</title>
 </head>
 <body>
-    <h1>Prediction Result</h1>
-    <p>Your predicted result is: <strong>{{ prediction }}</strong></p>
-    
-    <!-- Add a link to return to the home page -->
-    <a href="/">Go back to the main page</a>
+    <div class="container">
+        <h1>Prediction Result</h1>
+        <p>Your predicted score is: </p>
+        <div class="prediction-result"><strong>{{ prediction }}</strong></div>
+        
+        <!-- Add a link to return to the home page -->
+        <a href="/" class="btn">Go back to the main page</a>
+    </div>
 </body>
 </html>
