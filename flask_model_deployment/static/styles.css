@@ -100,3 +100,39 @@ input[type="text"], input[type="number"] {
     box-sizing: border-box;     /* Ensure padding and border are included in the width */
     font-size: 16px;             /* Input text size */
 }
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 25%;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-right: 1px solid #ccc;
+}
+
+.main-content {
+    width: 75%;
+    padding: 20px;
+}
+
+.sidebar h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.prediction-result {
+    font-size: 1.5em;
+    color: #2a9d8f;
+    font-weight: bold;
+}

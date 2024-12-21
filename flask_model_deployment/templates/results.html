@@ -3,17 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <title>Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Prediction Result</h1>
-        <p>Your predicted score is: </p>
-        <div class="prediction-result"><strong>{{ prediction }}</strong></div>
-        
-        <!-- Add a link to return to the home page -->
-        <a href="/" class="btn">Go back to the main page</a>
+        <div class="sidebar">
+            <h3>Past Predictions</h3>
+            {% if past_predictions %}
+                <ul>
+                    {% for prediction in past_predictions %}
+                        <li>
+                            <strong>Score:</strong> {{ prediction['predicted_scores'] }}<br>
+                            <small>Hours Studied: {{ prediction['hours_studied'] }},
+                            Attendance: {{ prediction['attendance'] }},
+                            Previous Score: {{ prediction['prev_score'] }},
+                            Tutoring: {{ prediction['tutoring_sessions'] }}</small>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No predictions yet.</p>
+            {% endif %}
+        </div>
+
+        <div class="main-content">
+            <h1>Prediction Result</h1>
+            <p>Your predicted score is:</p>
+            <div class="prediction-result"><strong>{{ prediction }}</strong></div>
+            
+            <a href="/" class="btn">Go back to the main page</a>
+        </div>
     </div>
 </body>
 </html>

@@ -2,47 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Machine Learning Classification Project</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict-a-score</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Score Predictor</h1>
-        <form method="POST" action="/predict" onsubmit="return validateForm()">
-            <label for="input1">Hours Studied:</label>
-            <input type="number" name="input1" id="input1" required min="0">
-            <br>
-        
-            <label for="input2">Hours of Attendance:</label>
-            <input type="number" name="input2" id="input2" required min="0">
-            <br>
-        
-            <label for="input3">Previous Test Score:</label>
-            <input type="number" name="input3" id="input3" required min="0">
-            <br>
-        
-            <label for="input4">Number of Tutoring Sessions:</label>
-            <input type="number" name="input4" id="input4" required min="0">
-            <br>
-        
-            <button type="submit">Predict</button>
-        </form>
-        <script>
-            function validateForm() {
-                const input1 = document.getElementById("input1").value;
-                const input2 = document.getElementById("input2").value;
-                const input3 = document.getElementById("input3").value;
-                const input4 = document.getElementById("input4").value;
-    
-                if (!Number.isInteger(Number(input1)) || !Number.isInteger(Number(input2)) ||
-                    !Number.isInteger(Number(input3)) || !Number.isInteger(Number(input4))) {
-                    alert("Please enter valid integers for all fields.");
-                    return false; // Prevent form submission
-                }
-                return true; // Allow form submission
-            }
-        </script>
+        <div class="sidebar">
+            <h3>Past Predictions</h3>
+            {% if predictions %}
+                <ul>
+                    {% for prediction in predictions %}
+                        <li>
+                            <strong>Score:</strong> {{ prediction['predicted_scores'] }}<br>
+                            <small>Hours Studied: {{ prediction['hours_studied'] }},
+                            Attendance: {{ prediction['attendance'] }},
+                            Previous Score: {{ prediction['prev_score'] }},
+                            Tutoring: {{ prediction['tutoring_sessions'] }}</small>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No predictions yet.</p>
+            {% endif %}
+        </div>
+
+        <div class="main-content">
+            <h1>Predict-a-score</h1>
+            <form method="POST" action="/predict" onsubmit="return validateForm()">
+                <label for="input1">Hours Studied:</label>
+                <input type="number" name="input1" id="input1" required min="0">
+                <br>
+
+                <label for="input2">Percentage of Attendance:</label>
+                <input type="number" name="input2" id="input2" required min="0">
+                <br>
+
+                <label for="input3">Previous Test Score:</label>
+                <input type="number" name="input3" id="input3" required min="0">
+                <br>
+
+                <label for="input4">Number of Tutoring Sessions:</label>
+                <input type="number" name="input4" id="input4" required min="0">
+                <br>
+
+                <button type="submit">Predict</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>
