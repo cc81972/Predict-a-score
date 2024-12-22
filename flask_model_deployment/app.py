@@ -9,26 +9,26 @@ from flask_admin.contrib.sqla import ModelView
 from datetime import datetime, timedelta
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.db'  # Replace with MySQL URL for MySQL
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.db'  # Replace with MySQL URL for MySQL
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# db = SQLAlchemy(app)
 app.secret_key = secrets.token_hex(16)  
 admin = Admin(app, name='Database Admin', template_mode='bootstrap3')
 
-class Prediction(db.Model):
-    id = db.Column(db.Integer, primary_key=True)  # Auto-incrementing ID
-    hours_studied = db.Column(db.Float, nullable=False)
-    hours_attendance = db.Column(db.Float, nullable=False)
-    previous_score = db.Column(db.Float, nullable=False)
-    tutoring_sessions = db.Column(db.Float, nullable=False)
-    predicted_score = db.Column(db.Float, nullable=False)
-    timestamp = datetime.now()
+# class Prediction(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)  # Auto-incrementing ID
+#     hours_studied = db.Column(db.Float, nullable=False)
+#     hours_attendance = db.Column(db.Float, nullable=False)
+#     previous_score = db.Column(db.Float, nullable=False)
+#     tutoring_sessions = db.Column(db.Float, nullable=False)
+#     predicted_score = db.Column(db.Float, nullable=False)
+#     timestamp = datetime.now()
 
-# Create the database tables (run this once)
-with app.app_context():
-    db.create_all()
+# # Create the database tables (run this once)
+# with app.app_context():
+#     db.create_all()
 
-admin.add_view(ModelView(Prediction, db.session))
+# admin.add_view(ModelView(Prediction, db.session))
 model = load_model('./neuralnetwork')  # neural network
 scaler = load('./scaler.pkl')
 
@@ -64,19 +64,19 @@ def predict():
         })
         session.modified = True
         # Storing to sql database
-        new_prediction = Prediction(
-            hours_studied=input1,
-            hours_attendance=input2,
-            previous_score=input3,
-            tutoring_sessions=input4,
-            predicted_score=predicted_class
-        )
-        db.session.add(new_prediction)
-        db.session.commit()
+        # new_prediction = Prediction(
+        #     hours_studied=input1,
+        #     hours_attendance=input2,
+        #     previous_score=input3,
+        #     tutoring_sessions=input4,
+        #     predicted_score=predicted_class
+        # )
+        # db.session.add(new_prediction)
+        # db.session.commit()
         
-        cutoff_date = datetime.now() - timedelta(days=30)
-        Prediction.query.filter(Prediction.timestamp < cutoff_date).delete()
-        db.session.commit()
+        # cutoff_date = datetime.now() - timedelta(days=30)
+        # Prediction.query.filter(Prediction.timestamp < cutoff_date).delete()
+        # db.session.commit()
 
         return render_template(
             "results.html", 
