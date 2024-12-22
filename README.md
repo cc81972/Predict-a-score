@@ -3,5 +3,5 @@
 conda env create -f environment.yaml
 
 ### Run Server
-Go to root directory and run:
+Go to flask_model_deployment directory and run:
 python3 app.py
