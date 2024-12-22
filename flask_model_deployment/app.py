@@ -29,8 +29,8 @@ with app.app_context():
     db.create_all()
 
 admin.add_view(ModelView(Prediction, db.session))
-model = load_model('../neuralnetwork')  # neural network
-scaler = load('../scaler.pkl')
+model = load_model('./neuralnetwork')  # neural network
+scaler = load('./scaler.pkl')
 
 @app.route("/")
 def index():
