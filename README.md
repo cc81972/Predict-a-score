@@ -1,3 +1,7 @@
+# Description
+Machine learning project that predicts student score. Trained on data retrieved from UC Irvine data repository.
+
+
 # How to Run Development Server
 ### Installing Dependencies
 conda env create -f environment.yaml
